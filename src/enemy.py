@@ -7,7 +7,7 @@ class Enemy(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         #The following two attributes must be called image and rect
-        #pygame assumes you have intitialized these values
+        #pygame assumes you have initialized these values
         #and uses them to update the screen
 
         #create surface object image
@@ -21,4 +21,10 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = 2
 
     def update(self):
-        print("'Update me,' says " + self.name)
+      """
+      Enemy movement is random. Takes class returns nothing
+      """
+      options = [-1,0,1]
+      self.rect.x += random.choice(options)
+      self.rect.x -= random.choice(options)
+      

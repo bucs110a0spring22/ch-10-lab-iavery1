@@ -3,6 +3,7 @@ import pygame
 import random
 from src import hero
 from src import enemy
+from src import food
 
 
 class Controller:
@@ -23,8 +24,13 @@ class Controller:
             x = random.randrange(100, 400)
             y = random.randrange(100, 400)
             self.enemies.add(enemy.Enemy("Boogie", x, y, 'assets/enemy.png'))
+
+        drumstick_x = random.randrange(100,400)
+        drumstick_y = random.randrange(100,400)
+        self.food = pygame.sprite.Group()
+        self.food.add(food.Food(drumstick_x, drumstick_y, 'assets/food.png'))
         self.hero = hero.Hero("Conan", 50, 80, "assets/hero.png")
-        self.all_sprites = pygame.sprite.Group((self.hero,) + tuple(self.enemies))
+        self.all_sprites = pygame.sprite.Group((self.hero,) + tuple(self.enemies) + tuple(self.food))
         self.state = "GAME"
 
     def mainLoop(self):
@@ -59,7 +65,9 @@ class Controller:
                     else:
                         self.background.fill((250, 0, 0))
                         self.enemies.add(e)
-
+            drumstick = pygame.sprite.spritecollide(self.hero, self.food, True)
+            if(drumstick):
+              self.hero.heal(self)
             # redraw the entire screen
             self.enemies.update()
             self.screen.blit(self.background, (0, 0))
@@ -68,7 +76,7 @@ class Controller:
             self.all_sprites.draw(self.screen)
 
             # update the screen
-            pygame.display.flip()
+            pygame.display.flip()            
 
     def gameOver(self):
         self.hero.kill()

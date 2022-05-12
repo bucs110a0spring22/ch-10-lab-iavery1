@@ -1,5 +1,6 @@
 import pygame
 import random
+
 #model
 class Hero(pygame.sprite.Sprite):
     def __init__(self, name, x, y, img_file):
@@ -7,10 +8,9 @@ class Hero(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         #The following two attributes must be called image and rect
-        #pygame assumes you have intitialized these values
+        #pygame assumes you have initialized these values
         #and uses them to update the screen
-
-        #create surface object image
+      #create surface object image
         self.image = pygame.image.load(img_file).convert_alpha()
         #get the rectangle for positioning
         self.rect = self.image.get_rect()
@@ -20,6 +20,8 @@ class Hero(pygame.sprite.Sprite):
         self.name = name
         self.speed = 3
         self.health = 3
+    def heal(self, amount):
+      self.health += 1
 
     #methods to make moving our hero easier
     def move_up(self):
@@ -39,3 +41,17 @@ class Hero(pygame.sprite.Sprite):
         else:
             print("successful attack")
         return True
+import pygame
+import random
+
+class Food(pygame.sprite.Sprite):
+  def __init__(self, x, y, img_file):
+    """
+    Adds food for character to consume, restores health
+    """
+    pygame.sprite.Sprite.__init__(self)
+    self.image = pygame.image.load(img_file).convert_alpha()
+    self.rect = self.image.get_rect()
+    self.rect.x = x
+    self.rect.y = y
+    

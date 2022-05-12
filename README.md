@@ -8,9 +8,9 @@
 Replace anything surrounded by the `< >` symbols._
 
 ## SUMMARY:
- < Provide a short description of your program's functionality. No more than a couple sentences. >
+ The hero fights the enemies, and if he picks up the drumstick he heals health.
 #### Unique Feature
- < Describe the unique feature you added >
+ Added drumstick that heals hp
 
 ## GRACE DAYS
 Grace days used for this assignment: < # >
